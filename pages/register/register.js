@@ -1,8 +1,7 @@
 import { userCreate } from '../../lib/auth-firebase.js';
 
 export default () => {
-      const containerRegister = document.createElement('div');
-
+    const containerRegister = document.createElement('div');
 
     const templateRegister = `
       <form class="logContainer">  
@@ -17,49 +16,49 @@ export default () => {
       
     `;
 
-      containerRegister.innerHTML = templateRegister;
+    containerRegister.innerHTML = templateRegister;
 
-  const name = containerRegister.querySelector('#inputEmail');
-  const email = containerRegister.querySelector('#inputName');
-  const password = containerRegister.querySelector('#inputSenha');
-  const btnCadastrar = containerRegister.querySelector('#btn-Cadastrar');
-  const msgAlert = containerRegister.querySelector('#message');
+const name = containerRegister.querySelector('#inputEmail');
+const email = containerRegister.querySelector('#inputName');
+const password = containerRegister.querySelector('#inputSenha');
+const btnCadastrar = containerRegister.querySelector('#btn-Cadastrar');
+const msgAlert = containerRegister.querySelector('#message');
 
-  btnCadastrar.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (name.value, email.value, password.value) {
-      userCreate(name.value, email.value, password.value)
-    .then(() => {
-      window.location.hash = '#feed';
+btnCadastrar.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (name.value, email.value, password.value) {
+    userCreate(name.value, email.value, password.value)
+  .then(() => {
+     window.location.hash = '#feed';
+  
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    let errorMessage = error.message;
 
-      })
-    .catch((error) => {
-      const errorCode = error.code;
-      let errorMessage = error.message;
-
-          switch (errorCode) {
-            case 'auth/invalid-email':
-              errorMessage = 'Insira um email válido.';
-              msgAlert.innerHTML = errorMessage;
-              break;
-            case 'auth/weak-password':
-              errorMessage = 'A senha deve ter no mínimo seis caracteres.';
-              msgAlert.innerHTML = errorMessage;
-              break;
-            case 'auth/email-already-in-use':
-              errorMessage = 'Email já cadastrado.';
-              msgAlert.innerHTML = errorMessage;
-              break;
-            case 'auth/missing-email':
-              errorMessage = 'Insira um email.';
-              msgAlert.innerHTML = errorMessage;
-              break;
-            default:
-              errorMessage = 'Preencha todos os campos';
-              msgAlert.innerHTML = errorMessage;
-    }
-  });
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            errorMessage = 'Insira um email válido.';
+            msgAlert.innerHTML = errorMessage;
+            break;
+          case 'auth/weak-password':
+            errorMessage = 'A senha deve ter no mínimo seis caracteres.';
+            msgAlert.innerHTML = errorMessage;
+            break;
+          case 'auth/email-already-in-use':
+            errorMessage = 'Email já cadastrado.';
+            msgAlert.innerHTML = errorMessage;
+            break;
+          case 'auth/missing-email':
+            errorMessage = 'Insira um email.';
+            msgAlert.innerHTML = errorMessage;
+            break;
+          default:
+            errorMessage = 'Preencha todos os campos';
+            msgAlert.innerHTML = errorMessage;
   }
-  });
-  return containerRegister;
+});
+}
+});
+return containerRegister;
 };
