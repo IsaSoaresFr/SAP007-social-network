@@ -31,66 +31,66 @@ export default () => {
     e.preventDefault();
     loginGoogle()
       .then(() => {
-        window.location.hash = '#feed';
-          })
-          .catch((error) => {
-          msgAlert.innerHTML = 'Login não deu certo, tente novamente!';
-          });
+    window.location.hash = '#feed';    
+    })
+      .catch((error) => {
+      msgAlert.innerHTML = 'Login não deu certo, tente novamente!';
+      });
   });
 
   btnEntrar.addEventListener('click', (e) => {
     e.preventDefault();
     if (loginEmail.value) {
       userLogin(loginEmail.value, loginSenha.value)
-        .then(() => {
-          window.location.hash = '#feed';
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          let messageError = error.message;
+      .then(() => {
+        window.location.hash = '#feed';
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        let messageError = error.message;
 
-          switch (errorCode) {
-            case 'auth/wrong-password':
-              messageError = 'Senha errada.';
+        switch (errorCode) {
+          case 'auth/wrong-password':
+            messageError = 'Senha errada.';
+            msgAlert.innerHTML = messageError;
+            break;
+          case 'auth/invalid-email':
+            messageError = 'Insira um email válido.';
+            msgAlert.innerHTML = messageError;
+            break;
+          case 'auth/user-not-found':
+              messageError = 'Usuário não encontrado.';
               msgAlert.innerHTML = messageError;
-              break;
-            case 'auth/invalid-email':
-              messageError = 'Insira um email válido.';
+            break;
+          case 'auth/internal-error':
+              messageError = 'Insira a senha.';
               msgAlert.innerHTML = messageError;
-              break;
-            case 'auth/user-not-found':
-                  messageError = 'Usuário não encontrado.';
-                  msgAlert.innerHTML = messageError;
-              break;
-            case 'auth/internal-error':
-                  messageError = 'Insira a senha.';
-                  msgAlert.innerHTML = messageError;
-              break;
+            break;
             default:
               messageError = 'Erro desconhecido';
-              msgAlert.innerHTML = messageError;
-          }
-        });
+              msgAlert.innerHTML = messageError;  
+        }          
+      });
     }
   });
-
+        
   btReset.addEventListener('click', (e) => {
-        e.preventDefault();
-          sendPasswordResetEmail(auth, email)
+      e.preventDefault();  
+      sendPasswordResetEmail(auth, email)
       .then(() => {
-          msgAlert.innerHTML = 'E-mail enviado para recurar senha!';
-                  // Password reset email sent!
-                  // ..
-            })
-          .catch((error) => {
-            switch (errorCode) {
-            case 'auth/invalid-email':
-              messageError = 'Insira um email válido.';
-              msgAlert.innerHTML = messageError;
-              break;
+         msgAlert.innerHTML = "E-mail enviado para recurar senha!";
+            // Password reset email sent!
+            // ..
+        })
+        .catch((error) => {
+        switch (errorCode) {
+         case 'auth/invalid-email':
+          messageError = 'Insira um email válido.';
+          msgAlert.innerHTML = messageError;
+          break;
         }
-           });
-  });
+        });
+    });
 
-  return containerLogin;
-};
+return containerLogin;
+}
