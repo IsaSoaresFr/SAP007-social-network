@@ -3,9 +3,10 @@ import { userCreate } from '../../lib/auth-firebase.js';
 export default () => {
       const containerRegister = document.createElement('div');
 
-      const templateRegister = `
-      <form class="conteudoRegister">  
-      <p class="paragrafoLogin">Sign Up</p>
+
+    const templateRegister = `
+      <form class="logContainer">  
+      <p class="loginParagraph">Crie sua conta</p>
       <input type="email" class="input nome" id="inputName" placeholder="Insira seu nome Completo" required /><br>
       <input type="email" class="input email" id="inputEmail" placeholder="Insira seu email" requerid /><br>
       <input type="password" class="input confirmaSenha" id="inputSenha" placeholder="Confirme sua senha" requerid /><br>
