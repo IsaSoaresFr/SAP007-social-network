@@ -7,9 +7,9 @@ export default () => {
   const containerFeed = document.createElement('div');
   const templateFeed = `
     <section class='feedcontainer'>
-    <section class='headerFeed'>
-    <button id='btnLogout' type='submit'>Sair</button><br>
-    </section>
+      <section class='headerFeed'>
+        <button id='btnLogout' type='submit'>Sair</button><br>
+      </section>
     <section class='postt'>
     <p class='tituloFeed'>Publique sua teoria &#x1F441</p>
     <input id='titulo' class='inputArea tituloArea' type='text' placeholder='Título' maxlength='90'/><br>
@@ -44,10 +44,11 @@ export default () => {
         const date = new Date().toLocaleString('pt-br');
         const item = {
           userEmail: auth.currentUser.email,
-          'titulo': titulo,
-          'post': post,
+          titulo,
+          post,
           date,
           likes: [],
+          id
         };
         sectionNewPost.appendChild(createCard(item));
         titulo = '';
@@ -60,6 +61,7 @@ export default () => {
     const arrayPosts = await getPost();
     arrayPosts.map(posts => {
       const elemento = createCard(posts);
+
       sectionAllPost.appendChild(elemento);
     });
   };

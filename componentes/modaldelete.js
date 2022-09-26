@@ -1,4 +1,4 @@
-import { deletePost } from "../../lib/config-firestore.js";
+import { deletePost } from "../lib/config-firestore.js";
 
 export function modalDeletePost(post, containerFeed) {
     const modalDelContainer = document.createElement('div');
